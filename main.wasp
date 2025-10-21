@@ -20,16 +20,7 @@ app Rutasmcs {
     },
     onAuthFailedRedirectTo: "/login",
     onAuthSucceededRedirectTo: "/"
-  },
-}
-  auth: {
-    userEntity: User,
-    methods: {
-      usernameAndPassword: {}
-    },
-    onAuthFailedRedirectTo: "/login",
-    onAuthSucceededRedirectTo: "/"
-  },
+  }
 }
 
 route LoginRoute { path: "/login", to: LoginPage }
