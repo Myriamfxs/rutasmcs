@@ -1,9 +1,10 @@
-db: {  
-  name: "appDb",  
-  provider: "postgresql",  
-  url: env("DATABASE_URL")  
-}
+db: removed from top and moved inside app
 app Rutasmcs {
+  db: {
+    name: "appDb",
+    provider: "postgresql",
+    url: env("DATABASE_URL")
+  },
   wasp: {
     version: "^0.18.0"
   },
