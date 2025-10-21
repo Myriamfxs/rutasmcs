@@ -1,4 +1,3 @@
-db: removed from top and moved inside app
 app Rutasmcs {
   db: {
     name: "appDb",
