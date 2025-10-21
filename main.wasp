@@ -1,9 +1,9 @@
-app Rutasmcs {
   db: {
     name: "appDb",
     provider: "postgresql",
-    url: env(DATABASE_URL)
-  },
+    url: env("DATABASE_URL")
+  }
+app Rutasmcs {
   wasp: {
     version: "^0.18.0"
   },
