@@ -1,6 +1,13 @@
 {
   "name": "Rutasmcs",
+  "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "dev": "wasp start",
+    "build": "wasp build",
+    "start": "wasp start-production",
+    "postinstall": "prisma generate"
+  },
   "dependencies": {
     "wasp": "file:.wasp/out/sdk/wasp",
     "react": "^18.2.0",
