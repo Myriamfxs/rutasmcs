@@ -4,8 +4,9 @@ app Rutasmcs {
   },
   title: "Rutasmcs",
   db: {
-    provider: "postgresql",
-    url: "DATABASE_URL"
+    system: "postgresql",
+    dbName: "rutasmcs",
+    connectionUrl: "DATABASE_URL"
   },
   head: [
     "<link rel='icon' href='/favicon.ico' />",
