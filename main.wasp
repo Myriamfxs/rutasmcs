@@ -1,19 +1,27 @@
-  db: {
-    name: "appDb",
-    provider: "postgresql",
-    url: env("DATABASE_URL")
-  }
 app Rutasmcs {
   wasp: {
     version: "^0.18.0"
   },
   title: "Rutasmcs",
+  db: {
+    provider: "postgresql",
+    url: env("DATABASE_URL")
+  },
   head: [
     "<link rel='icon' href='/favicon.ico' />",
   ],
   client: {
     rootComponent: import { Layout } from "@src/Layout.jsx",
   },
+  auth: {
+    userEntity: User,
+    methods: {
+      usernameAndPassword: {}
+    },
+    onAuthFailedRedirectTo: "/login",
+    onAuthSucceededRedirectTo: "/"
+  },
+}
   auth: {
     userEntity: User,
     methods: {
