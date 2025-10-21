@@ -5,7 +5,7 @@ app Rutasmcs {
   title: "Rutasmcs",
   db: {
     provider: "postgresql",
-    url: env("DATABASE_URL")
+    url: "DATABASE_URL"
   },
   head: [
     "<link rel='icon' href='/favicon.ico' />",
