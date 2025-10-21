@@ -1,0 +1,80 @@
+app Rutasmcs {
+  wasp: {
+    version: "^0.18.0"
+  },
+  title: "Rutasmcs",
+  head: [
+    "<link rel='icon' href='/favicon.ico' />",
+  ],
+  client: {
+    rootComponent: import { Layout } from "@src/Layout.jsx",
+  },
+  auth: {
+    userEntity: User,
+    methods: {
+      usernameAndPassword: {}
+    },
+    onAuthFailedRedirectTo: "/login",
+    onAuthSucceededRedirectTo: "/"
+  },
+}
+
+route LoginRoute { path: "/login", to: LoginPage }
+page LoginPage {
+  component: import Login from "@src/pages/auth/Login.jsx"
+}
+
+route SignupRoute { path: "/signup", to: SignupPage }
+page SignupPage {
+  component: import Signup from "@src/pages/auth/Signup.jsx"
+}
+
+action createVisita {
+  fn: import { createVisita } from "@src/actions.js",
+  entities: [Visita, Cliente]
+}
+
+action updateVisita {
+  fn: import { updateVisita } from "@src/actions.js",
+  entities: [Visita]
+}
+
+query getVisitas {
+  fn: import { getVisitas } from "@src/queries.js",
+  entities: [Visita]
+}
+
+query getClienteDetails {
+  fn: import { getClienteDetails } from "@src/queries.js",
+  entities: [Cliente, Pedido, Prediccion]
+}
+
+route AgendaRoute { path: "/agenda", to: AgendaPage }
+page AgendaPage {
+  component: import AgendaPage from "@src/pages/Agenda.jsx",
+  authRequired: true
+}
+
+route AgendaDetailRoute { path: "/agenda/:fecha", to: AgendaDetailPage }
+page AgendaDetailPage {
+  component: import AgendaDetailPage from "@src/pages/AgendaDetail.jsx",
+  authRequired: true
+}
+
+route ClientesRoute { path: "/clientes", to: ClientesPage }
+page ClientesPage {
+  component: import ClientesPage from "@src/pages/Clientes.jsx",
+  authRequired: true
+}
+
+route ClienteDetailRoute { path: "/clientes/:id", to: ClienteDetailPage }
+page ClienteDetailPage {
+  component: import ClienteDetailPage from "@src/pages/ClienteDetail.jsx",
+  authRequired: true
+}
+
+route NewVisitaRoute { path: "/nueva-visita", to: NewVisitaPage }
+page NewVisitaPage {
+  component: import NewVisitaPage from "@src/pages/NewVisita.jsx",
+  authRequired: true
+}

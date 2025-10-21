@@ -1,0 +1,92 @@
+datasource db {
+  provider = "sqlite"
+  // Wasp requires that the url is set to the DATABASE_URL environment variable.
+  url      = env("DATABASE_URL")
+}
+
+// Wasp requires the `prisma-client-js` generator to be present.
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id Int @id @default(autoincrement())
+}
+
+model Cliente {
+  id Int @id @default(autoincrement())
+  nombre String
+  categoria String
+  telefono String
+  email String
+  cif String @unique
+  direccion Direccion?
+  pedidos Pedido[]
+}
+
+model Direccion {
+  id Int @id @default(autoincrement())
+  clienteId Int @unique
+  calle String
+  cp String
+  ciudad String
+  provincia String
+  lat Decimal?
+  lon Decimal?
+  cliente Cliente @relation(fields: [clienteId], references: [id])
+}
+
+model Producto {
+  id Int @id @default(autoincrement())
+  ref String @unique
+  descripcion String
+  familia String
+  pvp Decimal
+  lineas LineaPedido[]
+}
+
+model Pedido {
+  id Int @id @default(autoincrement())
+  erpId Int @unique
+  fecha DateTime
+  total Decimal
+  clienteId Int
+  cliente Cliente @relation(fields: [clienteId], references: [id])
+  lineas LineaPedido[]
+}
+
+model LineaPedido {
+  pedidoId Int
+  productoId Int
+  unidades Int
+  pvp Decimal
+  pedido Pedido @relation(fields: [pedidoId], references: [id])
+  producto Producto @relation(fields: [productoId], references: [id])
+  @@id([pedidoId, productoId])
+}
+
+model Visita {
+  id Int @id @default(autoincrement())
+  fecha DateTime
+  estado EstadoVisita @default(PENDIENTE)
+  ordenDia Int?
+  notas String?
+  clienteId Int
+  cliente Cliente @relation(fields: [clienteId], references: [id])
+}
+
+enum EstadoVisita {
+  PENDIENTE
+  REALIZADA
+  CANCELADA
+}
+
+model Prediccion {
+  clienteId Int
+  productoId Int
+  prob Float
+  fechaCalculo DateTime @default(now())
+  cliente Cliente @relation(fields: [clienteId], references: [id])
+  producto Producto @relation(fields: [productoId], references: [id])
+  @@id([clienteId, productoId])
+}
